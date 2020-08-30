@@ -8,22 +8,13 @@ defmodule Cards do
         end
     end
 
-    def shuffle(deck) do
-        Enum.shuffle(deck)
-    end
+    def shuffle(deck), do: Enum.shuffle(deck)
 
-    def contains?(deck, card) do
-        Enum.member?(deck, card)
-    end
+    def contains?(deck, card), do: Enum.member?(deck, card)
 
-    def deal(deck, size) do
-        Enum.split(deck, size)
-    end
+    def deal(deck, size), do: Enum.split(deck, size)
 
-    def save(deck, filename) do
-        binary = :erlang.term_to_binary(deck)
-        File.write(filename, binary)
-    end
+    def save(deck, filename), do: File.write(filename, :erlang.term_to_binary(deck))
 
     def load(filename) do
         case File.read(filename) do
