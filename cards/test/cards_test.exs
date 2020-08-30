@@ -55,4 +55,31 @@ defmodule CardsTest do
         "Queen of Club", "Queen of Heart", "Queen of Diamond", "King of Spade",
         "King of Club", "King of Heart", "King of Diamond"]
     end
+
+    test "save deck" do
+        assert Cards.create_deck |> Cards.save("deck") == :ok
+        File.rm_rf!("deck")
+    end
+
+    test "load deck from file that exist" do
+        Cards.create_deck |> Cards.save("deck")
+        assert Cards.load("deck") == ["Ace of Spade", "Ace of Club", "Ace of Heart", "Ace of Diamond",
+        "Two of Spade", "Two of Club", "Two of Heart", "Two of Diamond",
+        "Three of Spade", "Three of Club", "Three of Heart", "Three of Diamond",
+        "Four of Spade", "Four of Club", "Four of Heart", "Four of Diamond",
+        "Five of Spade", "Five of Club", "Five of Heart", "Five of Diamond",
+        "Six of Spade", "Six of Club", "Six of Heart", "Six of Diamond",
+        "Seven of Spade", "Seven of Club", "Seven of Heart", "Seven of Diamond",
+        "Eight of Spade", "Eight of Club", "Eight of Heart", "Eight of Diamond",
+        "Nine of Spade", "Nine of Club", "Nine of Heart", "Nine of Diamond",
+        "Ten of Spade", "Ten of Club", "Ten of Heart", "Ten of Diamond",
+        "Jack of Spade", "Jack of Club", "Jack of Heart", "Jack of Diamond",
+        "Queen of Spade", "Queen of Club", "Queen of Heart", "Queen of Diamond",
+        "King of Spade", "King of Club", "King of Heart", "King of Diamond"]
+        File.rm_rf!("deck")
+    end
+
+    test "load deck from file that doesn't exist" do
+        assert Cards.load("deck") == "This file doesn't exist in memory"
+    end
 end
