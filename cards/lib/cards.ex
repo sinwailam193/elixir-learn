@@ -14,6 +14,8 @@ defmodule Cards do
 
     def deal(deck, size), do: Enum.split(deck, size)
 
+    def create_hand(hand_size), do: create_deck() |> shuffle() |> deal(hand_size)
+
     def save(deck, filename), do: File.write(filename, :erlang.term_to_binary(deck))
 
     def load(filename) do
