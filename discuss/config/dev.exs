@@ -1,14 +1,5 @@
 use Mix.Config
 
-# Configure your database
-config :discuss, Discuss.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "discuss_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -16,19 +7,19 @@ config :discuss, Discuss.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :discuss, DiscussWeb.Endpoint,
-  http: [port: 4000],
-  debug_errors: true,
-  code_reloader: true,
-  check_origin: false,
-  watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
+    http: [port: 4000],
+    debug_errors: true,
+    code_reloader: true,
+    check_origin: false,
+    watchers: [
+        node: [
+            "node_modules/webpack/bin/webpack.js",
+            "--mode",
+            "development",
+            "--watch-stdin",
+            cd: Path.expand("../assets", __DIR__)
+        ]
     ]
-  ]
 
 # ## SSL Support
 #
@@ -56,14 +47,14 @@ config :discuss, DiscussWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :discuss, DiscussWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/discuss_web/(live|views)/.*(ex)$",
-      ~r"lib/discuss_web/templates/.*(eex)$"
+    live_reload: [
+        patterns: [
+            ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+            ~r"priv/gettext/.*(po)$",
+            ~r"lib/discuss_web/(live|views)/.*(ex)$",
+            ~r"lib/discuss_web/templates/.*(eex)$"
+        ]
     ]
-  ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
@@ -74,3 +65,5 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+import_config "dev.secret.exs"
